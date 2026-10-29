@@ -32,6 +32,9 @@ __mock-projects__
 
 debug/
 .context/
+# Tauri/Rust build output
+desktop/src-tauri/target/
+desktop/src-tauri/gen/
 docs/bot-detection.md
 # Issue-specific plans/specs belong in Linear, not the repository. Existing
 # tracked historical specs remain tracked; this keeps new local artifacts out.

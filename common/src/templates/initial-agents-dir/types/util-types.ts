@@ -1,3 +1,5 @@
+import { JSONSchema as ZodJSONSchema } from 'zod/v4/core'
+
 // ===== JSON Types =====
 export type JSONValue =
   | null
@@ -12,24 +14,12 @@ export type JSONObject = { [key: string]: JSONValue | undefined }
 export type JSONArray = JSONValue[]
 
 /**
- * JSON Schema definition (for prompt schema or output schema)
+ * JSON Schema definition (for prompt schema or output schema).
+ * Aliased to zod's JSONSchema so DynamicAgentDefinition (zod-inferred) and
+ * AgentDefinition (this hand-written type) stay structurally compatible.
  */
-export type JsonSchema = {
-  type?:
-    | 'object'
-    | 'array'
-    | 'string'
-    | 'number'
-    | 'boolean'
-    | 'null'
-    | 'integer'
-  description?: string
-  properties?: Record<string, JsonSchema | boolean>
-  required?: string[]
-  enum?: Array<string | number | boolean | null>
-  [k: string]: unknown
-}
-export type JsonObjectSchema = JsonSchema & { type: 'object' }
+export type JsonSchema = ZodJSONSchema.JSONSchema
+export type JsonObjectSchema = ZodJSONSchema.JSONSchema & { type: 'object' }
 
 // ===== Data Content Types =====
 export type DataContent = string | Uint8Array | ArrayBuffer | Buffer
