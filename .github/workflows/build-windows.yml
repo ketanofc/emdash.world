@@ -42,12 +42,8 @@ jobs:
           npm run build
 
       - name: Build Tauri (release)
-        working-directory: desktop/src-tauri
-        run: cargo build --release
-
-      - name: Package installer
         working-directory: desktop
-        run: npx @tauri-apps/cli build
+        run: cargo tauri build
 
       - name: Upload installer artifact
         uses: actions/upload-artifact@v4
