@@ -24,6 +24,9 @@ jobs:
         with:
           targets: x86_64-pc-windows-msvc
 
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2" --locked
+
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
