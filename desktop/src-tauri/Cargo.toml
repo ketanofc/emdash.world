@@ -4,6 +4,10 @@ version = "0.1.0"
 description = "Emdash local-first AI coding desktop shell"
 edition = "2021"
 
+[lib]
+name = "emdash_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
 
