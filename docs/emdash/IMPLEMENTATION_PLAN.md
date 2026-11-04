@@ -328,5 +328,31 @@ Can a user currently open Emdash, submit a real prompt through the desktop UI, a
 | N. CLI compatibility | PASS |
 | O. License/redistribution | FAIL (ambiguity remains) |
 
-## Smallest useful next step
-Push to a GitHub fork and trigger build-windows.yml; install Rust+Ollama locally to verify end-to-end.
+## Windows Build Success (2026-11-04)
+
+### Build result
+- GitHub Actions run #41225420768 completed with conclusion: **success**.
+- Artifact: `emdash-windows-installer` (4,743,146 bytes).
+- Installer: `Emdash_0.1.0_x64_en-US.msi` (4,968,448 bytes) — verified as a real MSI binary.
+
+### Final acceptance matrix (updated)
+| Criterion | Status |
+|---|---|
+| A. Frontend builds/typechecks | PASS |
+| B. Tauri compiles | **PASS** (via CI) |
+| C. Native Windows app launches | NOT VERIFIED (not installed/tested) |
+| D. User sends real prompt via desktop UI | NOT VERIFIED |
+| E. Existing agent returns real response via native app | NOT VERIFIED |
+| F. Workspace selection/access controls | PARTIAL |
+| G. Real file diffs/approved edits | PARTIAL (diff preview + confirm) |
+| H. Beginner/Builder modes | PARTIAL (UI + persistence) |
+| I. Ollama status/selected provider truthful | PASS |
+| J. Real local inference (Ollama) | NOT VERIFIED |
+| K. Security/licensing review | PARTIAL |
+| L. Windows installer builds | **PASS** (artifact produced) |
+| M. Installed app on clean Windows | NOT VERIFIED |
+| N. CLI compatibility | PASS |
+| O. License/redistribution | FAIL (ambiguity remains) |
+
+### Next step
+Download and install the MSI on a clean Windows environment to verify launch and basic workflow.
