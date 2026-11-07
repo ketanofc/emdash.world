@@ -39,6 +39,20 @@ export default function App() {
     return out.join('\n')
   }
 
+  function unifiedDiff(a: string, b: string, path: string): string {
+    const la = a.split('\n')
+    const lb = b.split('\n')
+    const lines: string[] = [`--- a/${path}`, `+++ b/${path}`]
+    let i = 0
+    while (i < Math.max(la.length, lb.length)) {
+      if (la[i] === lb[i]) { lines.push(' ' + (la[i] ?? '')); i++; continue }
+      if (la[i] !== undefined) lines.push('-' + la[i])
+      if (lb[i] !== undefined) lines.push('+' + lb[i])
+      i++
+    }
+    return lines.join('\n')
+  }
+
   useEffect(() => { localStorage.setItem('emdash.mode', mode) }, [mode])
   useEffect(() => { localStorage.setItem('emdash.messages', JSON.stringify(messages)) }, [messages])
 
@@ -188,7 +202,7 @@ export default function App() {
                   <textarea value={newContent} onChange={(e) => setNewContent(e.target.value)} style={{ width: '100%', minHeight: 120, marginTop: 4 }} />
                   <details style={{ marginTop: 4 }}>
                     <summary className="muted">Preview diff</summary>
-                    <pre style={{ whiteSpace: 'pre-wrap', fontSize: 12, maxHeight: 200, overflow: 'auto' }}>{simpleDiff(fileContent, newContent)}</pre>
+                    <pre style={{ whiteSpace: 'pre-wrap', fontSize: 12, maxHeight: 200, overflow: 'auto' }}>{unifiedDiff(fileContent, newContent, filePath)}</pre>
                   </details>
                   <div className="row" style={{ marginTop: 4 }}>
                     <button className="btn" onClick={writeFile}>Apply (confirm)</button>

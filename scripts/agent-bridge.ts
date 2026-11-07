@@ -54,6 +54,8 @@ const allDefs = Object.values(bundledAgents)
 const agentDef = bundledAgents['base-chat'] ?? allDefs[0]
 
 let collected = ''
+const ac = new AbortController()
+const timer = setTimeout(() => ac.abort(), 120_000)
 try {
   const result = await run({
     agent: agentDef as any,
@@ -64,10 +66,12 @@ try {
     handleStreamChunk: (c: any) => {
       if (typeof c === 'string') collected += c
     },
+    signal: ac.signal,
     handleEvent: (e: any) => {
       if (e?.type === 'assistant_message' && typeof e?.content === 'string') collected += e.content
     },
   } as any)
+  clearTimeout(timer)
   const text = collected || (typeof result === 'string' ? result : '')
   if (!text.trim()) {
     out({ ok: false, error: 'agent returned an empty response' })
@@ -75,6 +79,8 @@ try {
   }
   out({ ok: true, text })
 } catch (e) {
-  out({ ok: false, error: (e as Error).message })
+  clearTimeout(timer)
+  const msg = ac.signal.aborted ? 'request timed out (120s)' : (e as Error).message
+  out({ ok: false, error: msg })
   process.exit(1)
 }
