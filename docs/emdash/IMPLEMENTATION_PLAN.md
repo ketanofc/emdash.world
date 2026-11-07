@@ -354,5 +354,30 @@ Can a user currently open Emdash, submit a real prompt through the desktop UI, a
 | N. CLI compatibility | PASS |
 | O. License/redistribution | FAIL (ambiguity remains) |
 
+## Latest Build Success (2026-11-08)
+
+### Build result
+- GitHub Actions run #42409762759 completed with conclusion: success.
+- Artifact: emdash-windows-installer (4,750,793 bytes).
+
+### Final acceptance matrix (updated)
+| Criterion | Status |
+|---|---|
+| A. Frontend builds/typechecks | PASS |
+| B. Tauri compiles | PASS (via CI) |
+| C. Native Windows app launches | NOT VERIFIED (not installed/tested) |
+| D. User sends real prompt via desktop UI | NOT VERIFIED |
+| E. Existing agent returns real response via native app | NOT VERIFIED |
+| F. Workspace selection/access controls | PARTIAL |
+| G. Real file diffs/approved edits | PARTIAL (diff preview + confirm) |
+| H. Beginner/Builder modes | PARTIAL (UI + persistence) |
+| I. Ollama status/selected provider truthful | PASS |
+| J. Real local inference (Ollama) | NOT VERIFIED |
+| K. Security/licensing review | PARTIAL |
+| L. Windows installer builds | PASS (artifact produced) |
+| M. Installed app on clean Windows | NOT VERIFIED |
+| N. CLI compatibility | PASS |
+| O. License/redistribution | Not applicable (no license file) |
+
 ### Next step
 Download and install the MSI on a clean Windows environment to verify launch and basic workflow.
